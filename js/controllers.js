@@ -28,6 +28,6 @@ angular.module('rehsipi.controllers', [])
 })
 .controller('LoginCtrl', function ($scope, $location) {
     $scope.login = function () {
-        $location.path('/app/index');
+        $location.path('/app/start');
     }
 })
