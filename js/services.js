@@ -50,7 +50,6 @@ angular.module('rehsipi.services', [])
         return recipes;
     },
     get: function(recipe_id) {
-      // Simple index lookup
       for (recipe in recipes.list) {
           if (recipes.list[recipe].id == recipe_id) {
               return recipes.list[recipe];
