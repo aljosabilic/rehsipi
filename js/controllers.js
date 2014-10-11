@@ -18,7 +18,7 @@ angular.module('rehsipi.controllers', [])
             console.log("Barcode Format -> " + imageData.format);
             console.log("Cancelled -> " + imageData.cancelled);
 
-            $location.path('/app/recipes');
+            //$location.path('/app/recipes');
 
             //$scope.$apply(function() {
             //    $scope.scan_result = 'Success';
