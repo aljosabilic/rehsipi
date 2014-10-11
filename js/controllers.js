@@ -5,11 +5,12 @@ angular.module('rehsipi.controllers', [])
         $location.path('/app/login');
     }
 })
-.controller('StartCtrl', function ($scope, $cordovaBarcodeScanner) {
+.controller('StartCtrl', function ($scope, $cordovaBarcodeScanner, $location) {
     $scope.scanBarcode = function() {
         $cordovaBarcodeScanner.scan().then(function(imageData) {
           // Success! Barcode data is here
-
+        $scope.barcode = imageData.text;
+        $location.path('/app/barcode');
     }, function(err) {
       // An error occured. Show a message to the user
 
@@ -25,6 +26,8 @@ angular.module('rehsipi.controllers', [])
 
     });
   }
+})
+.controller('BarcodeCtrl', function($scope) {
 })
 .controller('LoginCtrl', function ($scope, $location) {
     $scope.login = function () {
