@@ -9,15 +9,8 @@ angular.module('rehsipi.controllers', [])
     $scope.scan_result = 'No scan performed yet'
 
     $scope.scanBarcode = function() {
-        alert('Scanning barcode');
-
         $cordovaBarcodeScanner.scan().then(function(imageData) {
           // Success! Barcode data is here
-            alert(imageData.text);
-
-            console.log("Barcode Format -> " + imageData.format);
-            console.log("Cancelled -> " + imageData.cancelled);
-
             $location.path('/app/recipes');
 
             //$scope.$apply(function() {
