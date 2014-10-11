@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 // leaflet-directive, 'google-maps'
-angular.module('rehsipi', ['ionic', 'rehsipi.services', 'rehsipi.controllers', 'ngCordova'])
+angular.module('migrozept', ['ionic', 'rehsipi.services', 'rehsipi.controllers', 'ngCordova'])
 
 
 .config(function($stateProvider, $urlRouterProvider) {
