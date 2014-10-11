@@ -2,22 +2,22 @@ angular.module('rehsipi.services', [])
 
 .factory('RecipeService', function($http, $location) {
   // Might use a resource here that returns a JSON array
-  var recipes = { ean_code: '', list: [] };
+  var recipes = { search_parameter: '', product: '', list: [] };
 
   return {
     recipes_for_ean: function(ean_code) {
-        if (recipes['ean_code'] == ean_code) {
+        if (recipes['search_parameter'] == ean_code) {
             // Pass
         } else {
             recipes['list'] = [];
 
-            $http.get('http://hackzurich14.herokuapp.com/api/' + ean_code).then(function (resp) {
-                recipes['ean_code'] = ean_code;
+            $http.get('http://hackzurich14.herokuapp.com/api/' + ean_code + '?recipes=1').then(function (resp) {
+                recipes['search_parameter'] = ean_code;
                 var product_name = resp.data['product']['name_english'];
+                recipes['product'] = product_name
 
-                recipes['list'].push.apply(recipes['list'], [
-                    { id: 0, title: product_name, description: 'A product', img: 'http://placehold.it/100x100'}
-                ]);
+                var recipe_list = resp.data['recipes']
+                recipes['list'].push.apply(recipes['list'], recipe_list);
             }, function (err) {
                 console.error(err);
                 alert('Product not found');
@@ -32,8 +32,11 @@ angular.module('rehsipi.services', [])
     },
     get: function(recipe_id) {
       // Simple index lookup
-      return recipes[recipe_id];
+      for (recipe in recipes.list) {
+          if (recipes.list[recipe].id == recipe_id) {
+              return recipes.list[recipe];
+          }
+      }
     }
-
   }
 });

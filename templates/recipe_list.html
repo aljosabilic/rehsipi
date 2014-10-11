@@ -5,9 +5,9 @@
                     class="item-thumbnail-left"
                     href="#/app/recipes/{{ recipe.id }}">
 
-            <img ng-src="{{ recipe.img }}">
-            <h2>{{ recipe.title }}</h2>
-            <p>{{ recipe.description }}</p>
+            <img ng-src="{{ recipe.smallImageUrls.0 }}">
+            <h2>{{ recipe.name }}</h2>
+            <p>Rating: {{ recipe.rating }}</p>
           </ion-item>
         </ion-list>
     </ion-content>
