@@ -34,15 +34,25 @@ angular.module('rehsipi', ['ionic', 'rehsipi.services', 'rehsipi.controllers', '
         }
     })
 
-    .state('app.login', {
-        url: "/login",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/login.html",
-                controller: "LoginCtrl"
-            }
-        }
-    })
+    .state('app.recipe_list', {
+          url: "/recipes",
+          views: {
+              'menuContent': {
+                  templateUrl: "templates/recipe_list.html",
+                  controller: "RecipesCtrl"
+              }
+          }
+      })
+
+      .state('app.recipe_details', {
+          url: "/recipes/:recipe_id",
+          views: {
+              'menuContent': {
+                  'templateUrl': "templates/recipe_details.html",
+                  controller: "RecipeDetailsCtrl"
+              }
+          }
+      })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/start');
