@@ -44,16 +44,6 @@ angular.module('rehsipi', ['ionic', 'rehsipi.services', 'rehsipi.controllers', '
         }
     })
 
-      .state('app.barcode', {
-          url: "/barcode",
-          views: {
-              'menuContent': {
-                  templateUrl: "templates/barcode.html",
-                  controller: "BarcodeCtrl"
-              }
-          }
-      })
-
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/start');
 
