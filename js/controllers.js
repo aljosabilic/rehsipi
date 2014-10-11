@@ -5,7 +5,7 @@ angular.module('rehsipi.controllers', [])
         $location.path('/app/login');
     }
 })
-.controller('StartCtrl', function ($scope, $cordovaBarcodeScanner) {
+.controller('StartCtrl', function ($scope, $location, $cordovaBarcodeScanner) {
     $scope.scan_result = 'No scan performed yet'
 
     $scope.scanBarcode = function() {
@@ -18,7 +18,7 @@ angular.module('rehsipi.controllers', [])
             console.log("Barcode Format -> " + imageData.format);
             console.log("Cancelled -> " + imageData.cancelled);
 
-            //$location.path('/app/recipes');
+            $location.path('/app/recipes');
 
             //$scope.$apply(function() {
             //    $scope.scan_result = 'Success';
