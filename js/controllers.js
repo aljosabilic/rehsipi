@@ -6,18 +6,26 @@ angular.module('rehsipi.controllers', [])
     }
 })
 .controller('StartCtrl', function ($scope, $cordovaBarcodeScanner) {
+    $scope.scan_result = 'No scan performed yet'
+
     $scope.scanBarcode = function() {
         $cordovaBarcodeScanner.scan().then(function(imageData) {
           // Success! Barcode data is here
-            $scope.$apply(function() {
-                $scope.scan_result = 'Success';
-                $scope.barcode = imageData.text;
-            });
+            alert(imageData.text);
+
+            console.log("Barcode Format -> " + imageData.format);
+            console.log("Cancelled -> " + imageData.cancelled);
+
+            //$scope.$apply(function() {
+            //    $scope.scan_result = 'Success';
+            //    $scope.barcode = imageData.text;
+            //});
     }, function(err) {
-      // An error occured. Show a message to the user
-            $scope.$apply(function() {
-                $scope.scan_result = 'Error: ' + err
-            });
+        // An error occured. Show a message to the user
+            console.log(err)
+            //$scope.$apply(function() {
+            //    $scope.scan_result = 'Error: ' + err
+            //});
     });
   };
 
