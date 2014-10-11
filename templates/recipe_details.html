@@ -1,10 +1,12 @@
 <ion-view title="Rehsipi">
     <ion-content has-header="true" padding="true">
-        <div class="col"><h1>{{ recipe.name }}</h1></div>
+        <div class="row">
+            <div class="icon-left"><img ng-src="{{ recipe.smallImageUrls[0] }}"></div>
+            <div class="col text-left"><h3>{{ recipe.name }}</h3></div>
+        </div>
         <ion-list can-swipe="listCanSwipe">
-          <ion-item ng-repeat="ingredient in recipe.ingredients"
-                    class="item-thumbnail-left">
-            <h2>{{ ingredient }}</h2>
+          <ion-item ng-repeat="ingredient in recipe.ingredients">
+            {{ ingredient.charAt(0).toUpperCase() + ingredient.slice(1) }}
           </ion-item>
         </ion-list>
     </ion-content>
