@@ -27,6 +27,9 @@ angular.module('rehsipi.services', [])
 
       return recipes;
     },
+    recipes_for_string: function(search_string) {
+        return recipes;
+    },
     get: function(recipe_id) {
       // Simple index lookup
       return recipes[recipe_id];

@@ -11,11 +11,11 @@
         <div class="col">
             <label class="item item-input">
                 <span class="input-label">Item name</span>
-                <input type="text">
+                <input type="text" name="item_name" ng-model="item.name">
             </label>
         </div>
         <div class="col">
-            <button class="button button-block button-positive" type="submit">Search recipes</button>
+            <button class="button button-block button-positive" type="submit" ng-click="searchItem()">Search recipes</button>
         </div>
     </ion-content>
 </ion-view>
