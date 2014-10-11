@@ -11,18 +11,11 @@ angular.module('rehsipi.controllers', [])
     $scope.scanBarcode = function() {
         $cordovaBarcodeScanner.scan().then(function(imageData) {
           // Success! Barcode data is here
-            $location.path('/app/recipes');
-
-            //$scope.$apply(function() {
-            //    $scope.scan_result = 'Success';
-            //    $scope.barcode = imageData.text;
-            //});
+            var barcode = imageData.text;
+            $location.path('/app/recipe_list/' + barcode);
     }, function(err) {
         // An error occured. Show a message to the user
-            console.log(err)
-            //$scope.$apply(function() {
-            //    $scope.scan_result = 'Error: ' + err
-            //});
+            console.log(err);
     });
   };
 
@@ -36,8 +29,8 @@ angular.module('rehsipi.controllers', [])
     });
   }
 })
-.controller('RecipesCtrl', function ($scope, RecipeService) {
-    $scope.recipes = RecipeService.all();
+.controller('RecipeListCtrl', function ($scope, $stateParams, RecipeService) {
+    $scope.recipes = RecipeService.recipes_for_ean($stateParams.ean_code);
 })
 .controller('RecipeDetailsCtrl', function($scope, $stateParams, RecipeService) {
     $scope.recipe = RecipeService.get($stateParams.recipe_id)

@@ -35,11 +35,11 @@ angular.module('rehsipi', ['ionic', 'rehsipi.services', 'rehsipi.controllers', '
     })
 
     .state('app.recipe_list', {
-          url: "/recipes",
+          url: "/recipe_list/:ean_code",
           views: {
               'menuContent': {
                   templateUrl: "templates/recipe_list.html",
-                  controller: "RecipesCtrl"
+                  controller: "RecipeListCtrl"
               }
           }
       })
