@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 // leaflet-directive, 'google-maps'
-angular.module('rehsipi', ['ionic', 'rehsipi.services', 'rehsipi.controllers', 'ngCordova'])
+angular.module('migrozept', ['ionic', 'rehsipi.services', 'rehsipi.controllers', 'ngCordova'])
 
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -34,15 +34,25 @@ angular.module('rehsipi', ['ionic', 'rehsipi.services', 'rehsipi.controllers', '
         }
     })
 
-    .state('app.login', {
-        url: "/login",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/login.html",
-                controller: "LoginCtrl"
-            }
-        }
-    })
+    .state('app.recipe_list', {
+          url: "/recipe_list/:search_parameter",
+          views: {
+              'menuContent': {
+                  templateUrl: "templates/recipe_list.html",
+                  controller: "RecipeListCtrl"
+              }
+          }
+      })
+
+      .state('app.recipe_details', {
+          url: "/recipes/:recipe_id",
+          views: {
+              'menuContent': {
+                  'templateUrl': "templates/recipe_details.html",
+                  controller: "RecipeDetailsCtrl"
+              }
+          }
+      })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/start');

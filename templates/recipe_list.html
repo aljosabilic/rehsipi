@@ -1,0 +1,23 @@
+<ion-view title="MigroZept">
+    <ion-content has-header="true" padding="true">
+        <div class="card">
+          <div class="item item-divider">
+            {{ recipes.product }}
+          </div>
+          <div class="item item-text-wrap">
+            {{ recipes.list.length }} recipes found!
+          </div>
+        </div>
+
+        <ion-list can-swipe="listCanSwipe">
+          <ion-item ng-repeat="recipe in recipes.list"
+                    class="item-thumbnail-left"
+                    href="#/app/recipes/{{ recipe.id }}">
+
+            <img ng-src="{{ recipe.smallImageUrls.0 }}">
+            <h2>{{ recipe.name }}</h2>
+            <p>Rating: {{ recipe.rating }}</p>
+          </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

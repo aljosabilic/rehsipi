@@ -1,11 +1,19 @@
 /* Your app's CSS, go crazy, make it your own */
 
+.bar-assertive {
+    background-color: rgb(255, 255, 255) !important;
+}
 
-/*.angular-google-map-container { height: 400px; }*/
+.button-assertive {
+    background-color: rgb(255, 102, 0) !important;
+}
 
-#map {
-  width: 100%;
-  height: 100%;
+.title {
+    color: rgb(255, 102, 0) !important;
+    font-family: Verdana;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 150% !important;
 }
 
 .scroll {

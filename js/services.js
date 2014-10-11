@@ -1,26 +1,61 @@
 angular.module('rehsipi.services', [])
 
-/**
- * A simple example service that returns some data.
- */
-.factory('PetService', function() {
+.factory('RecipeService', function($http, $location) {
   // Might use a resource here that returns a JSON array
-
-  // Some fake testing data
-  var pets = [
-    { id: 0, title: 'Cats', description: 'Furry little creatures. Obsessed with plotting assassination, but never following through on it.' },
-    { id: 1, title: 'Dogs', description: 'Lovable. Loyal almost to a fault. Smarter than they let on.' },
-    { id: 2, title: 'Turtles', description: 'Everyone likes turtles.' },
-    { id: 3, title: 'Sharks', description: 'An advanced pet. Needs millions of gallons of salt water. Will happily eat you.' }
-  ];
+  var recipes = { search_parameter: '', product: '', list: [] };
 
   return {
-    all: function() {
-      return pets;
+    recipes_for_ean: function(ean_code) {
+        if (recipes['search_parameter'] == ean_code) {
+            // Pass
+        } else {
+            recipes['list'] = [];
+
+            $http.get('http://hackzurich14.herokuapp.com/api/' + ean_code + '?recipes=1').then(function (resp) {
+                recipes['search_parameter'] = ean_code;
+                var product_name = resp.data['product']['name_english'];
+                recipes['product'] = product_name
+
+                var recipe_list = resp.data['recipes']
+                recipes['list'].push.apply(recipes['list'], recipe_list);
+            }, function (err) {
+                console.error(err);
+                alert('Product not found');
+                $location.path('/app/start');
+            });
+        }
+
+      return recipes;
     },
-    get: function(petId) {
+    recipes_for_string: function(search_string) {
+        if (recipes['search_parameter'] == search_string) {
+            // Pass
+        } else {
+            recipes['list'] = [];
+
+            $http.get('http://hackzurich14.herokuapp.com/api/searchrecipe/' + search_string + '?recipes=1').then(function (resp) {
+                recipes['search_parameter'] = search_string;
+                var product_name = search_string;
+                recipes['product'] = product_name
+
+                var recipe_list = resp.data
+                recipes['list'].push.apply(recipes['list'], recipe_list);
+            }, function (err) {
+                console.error(err);
+                alert('No recipes found!');
+                $location.path('/app/start');
+            });
+        }
+
+        return recipes;
+    },
+    get: function(recipe_id) {
       // Simple index lookup
-      return pets[petId];
+      for (recipe in recipes.list) {
+          if (recipes.list[recipe].id == recipe_id) {
+              return recipes.list[recipe];
+          }
+      }
     }
   }
 });

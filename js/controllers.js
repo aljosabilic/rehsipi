@@ -5,30 +5,22 @@ angular.module('rehsipi.controllers', [])
         $location.path('/app/login');
     }
 })
-.controller('StartCtrl', function ($scope, $cordovaBarcodeScanner) {
-    $scope.scan_result = 'No scan performed yet'
+.controller('StartCtrl', function ($scope, $location, $cordovaBarcodeScanner) {
+    $scope.item = { name: '' };
 
     $scope.scanBarcode = function() {
-        alert('Scanning barcode');
-
         $cordovaBarcodeScanner.scan().then(function(imageData) {
           // Success! Barcode data is here
-            alert(imageData.text);
-
-            console.log("Barcode Format -> " + imageData.format);
-            console.log("Cancelled -> " + imageData.cancelled);
-
-            //$scope.$apply(function() {
-            //    $scope.scan_result = 'Success';
-            //    $scope.barcode = imageData.text;
-            //});
+            var barcode = imageData.text;
+            $location.path('/app/recipe_list/' + barcode);
     }, function(err) {
         // An error occured. Show a message to the user
-            console.log(err)
-            //$scope.$apply(function() {
-            //    $scope.scan_result = 'Error: ' + err
-            //});
+            console.log(err);
     });
+  };
+
+  $scope.searchItem = function() {
+      $location.path('/app/recipe_list/' + $scope.item.name);
   };
 
   // NOTE: encoding not functioning yet
@@ -41,8 +33,15 @@ angular.module('rehsipi.controllers', [])
     });
   }
 })
-.controller('LoginCtrl', function ($scope, $location) {
-    $scope.login = function () {
-        $location.path('/app/start');
+.controller('RecipeListCtrl', function ($scope, $stateParams, RecipeService) {
+    search_parameter = $stateParams.search_parameter;
+    if (isNaN(search_parameter)) {
+        // Not a number, i.e. search query
+        $scope.recipes = RecipeService.recipes_for_string(search_parameter)
+    } else {
+        $scope.recipes = RecipeService.recipes_for_ean(search_parameter);
     }
+})
+.controller('RecipeDetailsCtrl', function($scope, $stateParams, RecipeService) {
+    $scope.recipe = RecipeService.get($stateParams.recipe_id)
 })
