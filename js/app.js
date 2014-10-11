@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 // leaflet-directive, 'google-maps'
-angular.module('rehsipi', ['ionic', 'rehsipi.services', 'rehsipi.controllers'])
+angular.module('rehsipi', ['ionic', 'rehsipi.services', 'rehsipi.controllers', 'ngCordova'])
 
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -40,36 +40,6 @@ angular.module('rehsipi', ['ionic', 'rehsipi.services', 'rehsipi.controllers'])
             'menuContent': {
                 templateUrl: "templates/login.html",
                 controller: "LoginCtrl"
-            }
-        }
-    })
-
-    .state('app.logout', {
-        url: "/logout",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/logout.html",
-                controller: "LogoutCtrl"
-            }
-        }
-    })
-
-    .state('app.ask', {
-        url: "/ask",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/ask.html",
-                controller: "MapCtrl"
-            }
-        }
-    })
-
-    .state('app.tell', {
-        url: "/tell",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/tell.html",
-                controller: "TellCtrl"
             }
         }
     })
