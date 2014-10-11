@@ -9,11 +9,15 @@ angular.module('rehsipi.controllers', [])
     $scope.scanBarcode = function() {
         $cordovaBarcodeScanner.scan().then(function(imageData) {
           // Success! Barcode data is here
-            $scope.scan_result = 'Success';
-            $scope.barcode = imageData.text;
+            $scope.$apply(function() {
+                $scope.scan_result = 'Success';
+                $scope.barcode = imageData.text;
+            });
     }, function(err) {
       // An error occured. Show a message to the user
-            $scope.scan_result = 'Error: ' + err
+            $scope.$apply(function() {
+                $scope.scan_result = 'Error: ' + err
+            });
     });
   };
 
