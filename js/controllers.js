@@ -5,7 +5,7 @@ angular.module('rehsipi.controllers', [])
         $location.path('/app/login');
     }
 })
-.controller('StartCtrl', function ($scope, $cordovaBarcodeScanner, $location) {
+.controller('StartCtrl', function ($scope, $cordovaBarcodeScanner) {
     $scope.scan_result = 'No scan performed yet'
 
     $scope.scanBarcode = function() {
