@@ -28,6 +28,25 @@ angular.module('rehsipi.services', [])
       return recipes;
     },
     recipes_for_string: function(search_string) {
+        if (recipes['search_parameter'] == search_string) {
+            // Pass
+        } else {
+            recipes['list'] = [];
+
+            $http.get('http://hackzurich14.herokuapp.com/api/searchrecipe/' + search_string + '?recipes=1').then(function (resp) {
+                recipes['search_parameter'] = search_string;
+                var product_name = search_string;
+                recipes['product'] = product_name
+
+                var recipe_list = resp.data
+                recipes['list'].push.apply(recipes['list'], recipe_list);
+            }, function (err) {
+                console.error(err);
+                alert('No recipes found!');
+                $location.path('/app/start');
+            });
+        }
+
         return recipes;
     },
     get: function(recipe_id) {
